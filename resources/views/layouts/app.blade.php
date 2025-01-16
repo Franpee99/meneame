@@ -65,6 +65,7 @@
             {{ $slot }}
         </main>
     </div>
+    <script src="/js/flowbite/flowbite.min.js"></script>
 </body>
 
 </html>
