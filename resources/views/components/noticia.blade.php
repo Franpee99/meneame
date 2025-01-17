@@ -5,6 +5,7 @@
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-500 hover:underline">
             <a href="{{ $noticia->url }}">{{ $noticia->titular }}</a>
         </h5>
+        <p class="text-xs text-gray-500 pb-5">{{ $noticia->created_at }}</p>
         <p class="font-normal text-gray-700 dark:text-gray-400">{{ $noticia->descripcion }}</p>
     </div>
     <div>
