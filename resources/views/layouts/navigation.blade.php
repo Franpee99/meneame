@@ -16,15 +16,6 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         Inicio
                     </x-nav-link>
-                    <x-nav-link :href="route('departamentos.index')" :active="request()->routeIs('departamentos.index')">
-                        Departamentos
-                    </x-nav-link>
-                    <x-nav-link :href="route('empleados.index')" :active="request()->routeIs('empleados.index')">
-                        Empleados
-                    </x-nav-link>
-                    <x-nav-link :href="route('articulos.index')" :active="request()->routeIs('articulos.index')">
-                        Artículos
-                    </x-nav-link>
                 </div>
             </div>
 
