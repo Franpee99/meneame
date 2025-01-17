@@ -10,6 +10,15 @@ class Noticia extends Model
     /** @use HasFactory<\Database\Factories\NoticiaFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'titular',
+        'url',
+        'descripcion',
+        'imagen',
+        'categoria_id',
+        'user_id'
+    ];
+
     public function categoria()
     {
         return $this->belongsTo(Categoria::class);

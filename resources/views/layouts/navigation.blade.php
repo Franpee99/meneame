@@ -16,6 +16,9 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         Inicio
                     </x-nav-link>
+                    <x-nav-link :href="route('noticias.create')" :active="request()->routeIs('noticias.create')">
+                        Crear noticia
+                    </x-nav-link>
                 </div>
             </div>
 
