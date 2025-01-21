@@ -17,12 +17,13 @@ class NoticiaFactory extends Factory
     public function definition(): array
     {
         $seed = Str::random(10);
+        $randomCategoria = random_int(1, 5);
         return [
             'titular' => fake()->text(25),
             'url' => fake()->url(),
             'descripcion' => fake()->text(),
             'imagen' => "https://picsum.photos/seed/$seed/300/200",
-            'categoria_id' => 1,
+            'categoria_id' => $randomCategoria,
             'user_id' => 1,
         ];
     }

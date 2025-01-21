@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreNoticiaRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreNoticiaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return !Auth::guest();
     }
 
     /**
@@ -22,7 +23,10 @@ class StoreNoticiaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'titular' => 'required|string|max:255',
+            'url' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'categoria_id' => 'required|exists:categorias,id',
         ];
     }
 }

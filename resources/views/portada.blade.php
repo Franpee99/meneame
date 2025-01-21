@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="mt-2">
-                {{ $noticias->links() }}
+                {{ $noticias->links() }}  <!--Para el paginado-->
             </div>
         </div>
     </div>
