@@ -9,6 +9,7 @@ use App\Models\Noticia;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class NoticiaController extends Controller implements HasMiddleware
 {
@@ -16,8 +17,12 @@ class NoticiaController extends Controller implements HasMiddleware
     public static function middleware() // Para implementar que debe estar logeado
     {
         return [
-            new Middleware('auth', only: ['create', 'store']),
+            new Middleware('auth', only: ['create', 'store']), // Para que te rediriga a iniciar sesion
         ];
+    }
+
+    public function index(){
+        return redirect()->route('home');
     }
 
     /**
@@ -36,8 +41,10 @@ class NoticiaController extends Controller implements HasMiddleware
     public function store(StoreNoticiaRequest $request)
     {
         //En vez de poner aqui la validacion, se pone en el StoreNoticiaRequest
-        $request->merge(['user_id' => Auth::id()]);
-        Noticia::create($request->input());
+
+        $noticia = new Noticia($request->input());
+        $noticia->user_id = Auth::id();
+        $noticia->save();
         return redirect()->route('home');
     }
 
@@ -54,7 +61,12 @@ class NoticiaController extends Controller implements HasMiddleware
      */
     public function edit(Noticia $noticia)
     {
-        //
+        Gate::authorize('update', $noticia); //En el NoticiaPolicy ponemos quien quien puede editarlo (autorizacion)
+
+        return view('noticias.edit', [
+            'noticia' => $noticia,
+            'categorias' => Categoria::orderBy('nombre')->get(),
+        ]);
     }
 
     /**
@@ -62,7 +74,13 @@ class NoticiaController extends Controller implements HasMiddleware
      */
     public function update(UpdateNoticiaRequest $request, Noticia $noticia)
     {
-        //
+        //En vez de poner aqui la validacion, se pone en el UpdateNoticiaRequest
+
+        Gate::authorize('update', $noticia); //Lo ponemos otra vez por seguridad
+
+        $noticia->fill($request->input());
+        $noticia->save();
+        return redirect()->route('home');
     }
 
     /**

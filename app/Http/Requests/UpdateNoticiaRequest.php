@@ -11,7 +11,7 @@ class UpdateNoticiaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true; //Lo pones a true para que si tenga autorizacion
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateNoticiaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'titular' => 'required|string|max:255',
+            'url' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'categoria_id' => 'required|exists:categorias,id',
         ];
     }
 }
