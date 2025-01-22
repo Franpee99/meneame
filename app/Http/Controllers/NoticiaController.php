@@ -42,10 +42,20 @@ class NoticiaController extends Controller implements HasMiddleware
     {
         //En vez de poner aqui la validacion, se pone en el StoreNoticiaRequest
 
+        $archivo = $request->file('imagen');
+
         $noticia = new Noticia($request->input());
         $noticia->user_id = Auth::id();
         $noticia->save();
+
+        $nombre = $noticia->id . '.jpg';
+        $archivo->storeAs('imagenes', $nombre, 'public');
+        $noticia->imagen = asset("storage/imagenes/$nombre");
+        $noticia->save();
+
         return redirect()->route('home');
+
+
     }
 
     /**
