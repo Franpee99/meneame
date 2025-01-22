@@ -88,6 +88,7 @@ class NoticiaController extends Controller implements HasMiddleware
      */
     public function destroy(Noticia $noticia)
     {
-        //
+        $noticia->delete();
+        return redirect()->route('home');
     }
 }
