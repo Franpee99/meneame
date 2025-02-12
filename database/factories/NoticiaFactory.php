@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 /**
@@ -24,7 +25,7 @@ class NoticiaFactory extends Factory
             'descripcion' => fake()->text(),
             'imagen' => "https://picsum.photos/seed/$seed/300/200",
             'categoria_id' => $randomCategoria,
-            'user_id' => 1,
+            'user_id' => User::first()->id,
         ];
     }
 }

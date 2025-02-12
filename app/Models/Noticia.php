@@ -33,12 +33,6 @@ class Noticia extends Model
 
     public function getRutaImagen()
     {
-        //Esto es para que salgan las imagenes del fake (NoticiaFactory.php)
-        if (filter_var($this->imagen, FILTER_VALIDATE_URL)) {
-            return $this->imagen;
-        }
-        // hasta aqui
-
-        return asset('storage/imagenes/' . $this->id . '.jpg');
+        return $this->imagen ?? asset('storage/imagenes/' . $this->id . '.jpg'); //para que salgan las imagenes del noticiaFactory
     }
 }
